@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgresdb
+    env_file:
+      - .env
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_DB=${POSTGRES_DB}"
+      - "POSTGRES_USER=${POSTGRES_USER}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASS}"
+    networks:
+      - my_network
+
+  fastapi:
+    build:
+      context: ./fastapi  # เปลี่ยนตรงนี้เพื่อระบุ context เป็น ./fastapi
+      dockerfile: Dockerfile
+    container_name: fastapi
+    env_file:
+      - .env
+    volumes:
+      - ./fastapi/app:/code/app
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+    networks:
+      - my_network
+
+  streamlit:
+    build:
+      context: ./streamlit
+      dockerfile: Dockerfile
+    container_name: streamlit
+    volumes:
+      - ./streamlit/app:/code
+      - ./streamlit/config:/root/.streamlit
+    ports:
+      - "8501:8501"
+    depends_on:
+      - postgres
+    networks:
+      - my_network 
+
+networks:
+  my_network:
+    driver: bridge

@@ -1,0 +1,14 @@
+altair
+pandas
+streamlit
+pymongo
+plotly
+scipy
+sqlalchemy
+streamlit_option_menu
+-r https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/main/tested_requirements/requirements_39.reqs
+streamlit-lottie
+scikit_learn==0.24.1
+psycopg2
+pyarrow==10.0.1
+pydeck==0.8.0
