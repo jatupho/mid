@@ -61,7 +61,7 @@ with st.sidebar:
     
 
 # กำหนด DATABASE_URL
-DATABASE_URL = "postgresql://cpe:Cpe%401234567!@idap.eastus2.cloudapp.azure.com:5432/postgres"
+DATABASE_URL = "postgresql://payet:root@4.191.73.176:5432/postgres"
 
 # ใช้ create_engine เพื่อเชื่อมต่อกับฐานข้อมูล PostgreSQL
 engine = create_engine(DATABASE_URL)
